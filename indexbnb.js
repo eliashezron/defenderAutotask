@@ -1,6 +1,5 @@
-const { main } = require("./autoTask")
+const { main } = require("./autoTaskbnb")
 const RECIPIENT = "0xdB01d94217308046a792D864b16A35837aa52B86"
-const TOKEN = "0xBCC84aB2ab1f84dC002EE2e6d5DE521c981453F3"
 const { ethers } = require("ethers")
 const {
   DefenderRelaySigner,
@@ -15,10 +14,9 @@ const signer = new DefenderRelaySigner(creds, provider, {
   gasLimit: 100000,
 })
 const recipient = RECIPIENT
-const token = TOKEN
-const amount = ethers.utils.parseEther("100")
+const amount = ethers.utils.parseEther("0.05")
 
-main(recipient, amount, token, signer)
+main(recipient, amount, signer)
   .then(() => process.exit(0))
   .catch((error) => {
     console.error(error)
