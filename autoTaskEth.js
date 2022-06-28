@@ -7,23 +7,18 @@ const ABI = [
         type: "address",
       },
       {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
-      {
         internalType: "uint256",
         name: "_amount",
         type: "uint256",
       },
     ],
-    name: "withdraw",
+    name: "withdrawEth",
     outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "payable",
     type: "function",
   },
 ]
-const CONTRACT = "0xE81B360050221377AFbb980c828792146Dc81612"
+const CONTRACT = "0xad0f2669a01a73c84678f18B276f43d41D1663F3"
 const { ethers } = require("ethers")
 const {
   DefenderRelaySigner,
@@ -32,18 +27,17 @@ const {
 
 /**
  * @param {string} recipient  recipient address
- * @param {string} token  token address
  * @param {ethers.signer} signer ethers signer for sending transaction
  * @param {string} contract contract address
  * @param {uint256} amount amount to send
  */
 
-async function main(recipient, amount, token, signer) {
+async function main(recipient, amount, signer) {
   const contract = new ethers.Contract(CONTRACT, ABI, signer)
-  const tx = await contract.withdraw(recipient, token, amount)
+  const tx = await contract.withdrawEth(recipient, amount)
   await tx.wait(1)
   console.log(
-    `withdrawed ${amount} of ${token} to ${recipient}, the transaction reciet is ${tx.hash}`
+    `withdrawed ${amount} of  ${recipient}, the transaction reciet is ${tx.hash}`
   )
 }
 // entry point for autotask
@@ -56,8 +50,8 @@ exports.handler = async function (event) {
   console.log(event)
   const recipient = event.request.body.recipient
   const amount = event.request.body.amount
-  const token = event.request.body.token
-  await main(recipient, amount, token, signer)
+
+  await main(recipient, amount, signer)
 }
 // exported for runing locally
 exports.main = main

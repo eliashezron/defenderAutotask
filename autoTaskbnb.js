@@ -18,7 +18,7 @@ const ABI = [
     type: "function",
   },
 ]
-const CONTRACT = "0x470B2d6Ba304b124128c0a51b920996f06ABE426"
+const CONTRACT = "0xE81B360050221377AFbb980c828792146Dc81612"
 const { ethers } = require("ethers")
 const {
   DefenderRelaySigner,
