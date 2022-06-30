@@ -16,7 +16,7 @@ const signer = new DefenderRelaySigner(creds, provider, {
 })
 const recipient = RECIPIENT
 const token = TOKEN
-const amount = ethers.utils.parseEther("100")
+const amount = ethers.utils.parseEther("0.001")
 
 main(recipient, amount, token, signer)
   .then(() => process.exit(0))

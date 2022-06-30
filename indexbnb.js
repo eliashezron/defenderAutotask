@@ -5,8 +5,8 @@ const {
   DefenderRelaySigner,
   DefenderRelayProvider,
 } = require("defender-relay-client/lib/ethers")
-const apiKey = "your api key from openzeppelin defender-relay-client"
-const apiSecret = "your api secret from openzeppelin defender-relay-client"
+const apiKey = "6AvrFvWYPExrV8cr3af1h1sMxoFrZpoe"
+const apiSecret = "cRKPC1Ad3D4nPW7oCBZ1rJBySsrufJqSQX4u26DgbXspLNujyyEcewEa6ArVFkMk"
 const creds = { apiKey, apiSecret }
 const provider = new DefenderRelayProvider(creds)
 const signer = new DefenderRelaySigner(creds, provider, {

@@ -1,21 +1,21 @@
 const ABI = [
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "_withdrawerAddress",
-        type: "address",
+        "internalType": "address",
+        "name": "_withdrawerAddress",
+        "type": "address"
       },
       {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
     ],
-    name: "withdrawEth",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
+    "name": "withdrawEth",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   },
 ]
 const CONTRACT = "0xad0f2669a01a73c84678f18B276f43d41D1663F3"
@@ -45,11 +45,8 @@ async function main(recipient, amount, signer) {
 exports.handler = async function (event) {
   const provider = new DefenderRelayProvider(event)
   const signer = new DefenderRelaySigner(event, provider, { speed: "fast" })
-  //   const [event] = request.params.body.matchReasons
-  //   console.log(`recieved match ${JSON.stringify(event)}`)
-  console.log(event)
   const recipient = event.request.body.recipient
-  const amount = event.request.body.amount
+  const amount = (event.request.body.amount).toString()
 
   await main(recipient, amount, signer)
 }

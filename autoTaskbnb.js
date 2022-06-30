@@ -45,9 +45,6 @@ async function main(recipient, amount, signer) {
 exports.handler = async function (event) {
   const provider = new DefenderRelayProvider(event)
   const signer = new DefenderRelaySigner(event, provider, { speed: "fast" })
-  //   const [event] = request.params.body.matchReasons
-  //   console.log(`recieved match ${JSON.stringify(event)}`)
-  console.log(event)
   const recipient = event.request.body.recipient
   const amount = event.request.body.amount
 
