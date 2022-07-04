@@ -5,8 +5,8 @@ const {
   DefenderRelaySigner,
   DefenderRelayProvider,
 } = require("defender-relay-client/lib/ethers")
-const apiKey = "6AvrFvWYPExrV8cr3af1h1sMxoFrZpoe"
-const apiSecret = "cRKPC1Ad3D4nPW7oCBZ1rJBySsrufJqSQX4u26DgbXspLNujyyEcewEa6ArVFkMk"
+const apiKey = "2yJdiD9qMCKpE9uqU76QQAvkqmBE3f51"
+const apiSecret = "2mLrmqm7FLQr2VQyutJewmSyvTDg5PDuZKc85Y2Sr6ZW7FJibSmqdDMMoFG64sTY"
 const creds = { apiKey, apiSecret }
 const provider = new DefenderRelayProvider(creds)
 const signer = new DefenderRelaySigner(creds, provider, {
@@ -14,7 +14,7 @@ const signer = new DefenderRelaySigner(creds, provider, {
   gasLimit: 100000,
 })
 const recipient = RECIPIENT
-const amount = ethers.utils.parseEther("0.05")
+const amount = ethers.utils.parseEther("0.001")
 
 main(recipient, amount, signer)
   .then(() => process.exit(0))
