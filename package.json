@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "defender-relay-client": "^1.24.0",
-    "ethers": "^5.6.9"
+    "ethers": "^5.6.9",
+    "web3": "^1.7.4"
   }
 }

@@ -19,36 +19,34 @@ const ABI = [
   },
 ]
 const CONTRACT = "0xad0f2669a01a73c84678f18B276f43d41D1663F3"
-const { ethers } = require("ethers")
-const {
-  DefenderRelaySigner,
-  DefenderRelayProvider,
-} = require("defender-relay-client/lib/ethers")
+const { DefenderRelayProvider } = require('defender-relay-client/lib/web3');
+const Web3 = require('web3');
 
 /**
  * @param {string} recipient  recipient address
- * @param {ethers.signer} signer ethers signer for sending transaction
+ * @param {web3.eth.providers} provider signer for sending transaction
  * @param {string} contract contract address
  * @param {uint256} amount amount to send
  */
 
-async function main(recipient, amount, signer) {
-  const contract = new ethers.Contract(CONTRACT, ABI, signer)
-  const tx = await contract.withdrawEth(recipient, amount)
-  await tx.wait(1)
-  console.log(
-    `withdrawed ${amount} of  ${recipient}, the transaction reciet is ${tx.hash}`
-  )
+async function main(recipient, amount, provider) {
+  const web3 = new Web3(provider);
+  const [from] = await web3.eth.getAccounts();
+  const contract = new web3.eth.Contract(ABI, CONTRACT, { from });
+  await contract.methods.withdrawEth(recipient, amount).send()
+  .on('receipt', function(receipt){
+    // receipt example
+    console.log(`withdrawed ${amount} to recipient ${recipient} with transaction hash ${receipt.transactionHash} and status ${receipt.status}`);
+  })  
 }
 // entry point for autotask
 
 exports.handler = async function (event) {
-  const provider = new DefenderRelayProvider(event)
-  const signer = new DefenderRelaySigner(event, provider, { speed: "fast" })
+  const provider = new DefenderRelayProvider(event, { speed: 'fast' });
+  // Use web3 instance for querying or sending txs, for example...
   const recipient = event.request.body.recipient
-  const amount = (event.request.body.amount).toString()
-
-  await main(recipient, amount, signer)
+  const amount = event.request.body.amount
+  await main(recipient, amount, provider)
 }
 // exported for runing locally
 exports.main = main
