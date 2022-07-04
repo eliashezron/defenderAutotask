@@ -18,7 +18,7 @@ const ABI = [
     "type": "function"
   },
 ]
-const CONTRACT = "0xad0f2669a01a73c84678f18B276f43d41D1663F3"
+const CONTRACT = "0x068726825cadC89558D8f9173b4782E6A170cEcd"
 const { DefenderRelayProvider } = require('defender-relay-client/lib/web3');
 const Web3 = require('web3');
 
